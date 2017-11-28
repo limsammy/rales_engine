@@ -59,6 +59,6 @@ describe 'Customers API' do
 
     customer = JSON.parse(response.body)
 
-    expect (customer.count).to eq(1)
+    expect(customer.count).to eq(1)
   end
 end
