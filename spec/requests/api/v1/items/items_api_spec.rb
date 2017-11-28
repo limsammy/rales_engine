@@ -1,6 +1,7 @@
 require 'rails_helper'
 
 describe "Items API" do
+  
   before(:each) do
     create_list(:item, 5)
   end
