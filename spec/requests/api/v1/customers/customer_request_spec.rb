@@ -14,14 +14,26 @@ feature 'Customers API' do
   end
 
   it 'returns customer by id' do
-    customer = create(:customer)
+    id = create(:customer).id
 
     get "/api/v1/customer/#{customer.id}"
 
     expect(response).to be_success
 
-    parsed = JSON.parse(response.body)
+    customer = JSON.parse(response.body)
 
-    expect(parsed["id"]).to eq(customer.id.to_s)
+    expect(customer["id"]).to eq(id)
+  end
+
+  it 'can #find first instance by name' do
+    id = create(:customer).id
+
+    get "/api/v1/customers/find?id=#{id}"
+
+    expect(response).to be_success
+
+    customer = JSON.parse(response.body)
+
+    expect(customer['id']).to eq(id)
   end
 end
