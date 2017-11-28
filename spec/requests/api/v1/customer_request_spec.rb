@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-feature 'Customers API' do
+describe 'Customers API' do
   it 'returns all customers' do
     create_list(:customer, 5)
 
@@ -58,5 +58,7 @@ feature 'Customers API' do
     expect(response).to be_success
 
     customer = JSON.parse(response.body)
+
+    expect (customer.count).to eq(1)
   end
 end
