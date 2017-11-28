@@ -21,4 +21,17 @@ describe "Invoice Items API" do
     expect(invoice_items.first).to have_key("quantity")
     expect(invoice_items.first).to have_key("unit_price")
   end
+
+  it "returns one invoice item" do
+    get "/api/v1/invoice_items/#{InvoiceItem.first.id}"
+
+    expect(response).to be_success
+
+    invoice_item = JSON.parse(response.body)
+
+    expect(invoice_item).to have_key("item_id")
+    expect(invoice_item).to have_key("invoice_id")
+    expect(invoice_item).to have_key("quantity")
+    expect(invoice_item).to have_key("unit_price")
+  end
 end
