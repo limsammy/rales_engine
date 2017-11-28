@@ -12,11 +12,11 @@ describe "Invoices API" do
     invoice_1 = invoices.first
 
     expect(invoices.count).to eq(5)
-    expect(invoice_1["id"]).to eq(invoice_1.id)
-    expect(invoice_1["customer_id"]).to eq(invoice_1.customer_id)
-    expect(invoice_1["merchant_id"]).to eq(invoice_1.merchant_id)
-    expect(invoice_1["status"]).to eq(invoice_1.status)
-    expect(invoice_1["created_at"]).to eq(invoice_1.created_at)
-    expect(invoice_1["updated_at"]).to eq(invoice_1.updated_at)
+    expect(invoice_1).to have_key("id")
+    expect(invoice_1).to have_key("customer_id")
+    expect(invoice_1).to have_key("merchant_id")
+    expect(invoice_1).to have_key("status")
+    expect(invoice_1).to have_key("created_at")
+    expect(invoice_1).to have_key("updated_at")
   end
 end
