@@ -14,7 +14,7 @@ module Api
         private
 
         def transaction_params
-          params.permit(:id, :invoice_id, :cc_num, :cc_expiration, :result, :created_at, :updated_at)
+          params.permit(:id, :invoice_id, :credit_card_number, :cc_expiration, :result, :created_at, :updated_at)
         end
       end
     end

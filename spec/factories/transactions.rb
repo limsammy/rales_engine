@@ -1,7 +1,7 @@
 FactoryBot.define do
   factory :transaction do
     invoice nil
-    cc_num "MyString"
+    credit_card_number "MyString"
     cc_expiration "MyString"
     result 1
   end
