@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :transaction do
-    references ""
+    invoice nil
     cc_num "MyString"
     cc_expiration "MyString"
     result 1
