@@ -19,7 +19,6 @@ Rails.application.routes.draw do
 
       resources :invoices, only: [:index, :show]
 
-<<<<<<< HEAD
       namespace :transactions do
         get '/random', to: "random#show"
         get '/find', to: "find#show"
@@ -28,10 +27,7 @@ Rails.application.routes.draw do
       end
       resources :transactions, only: [:index, :show]
 
-      resources :invoice_items, only: [:index]
-=======
       resources :invoice_items, only: [:index, :show]
->>>>>>> route and controller action create for single invoice item end pt
     end
   end
 end
