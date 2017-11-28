@@ -55,7 +55,7 @@ describe "Transactions API" do
     transaction = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(transaction.first["credit_card_number"]).to eq(credit_card_number)
+    expect(transaction.first["cc_num"]).to eq(credit_card_number)
   end
   #
   it "can return a random transaction" do
