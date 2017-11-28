@@ -1,5 +1,5 @@
 class ChangeTransactionsCcNum < ActiveRecord::Migration[5.1]
   def change
-    rename_column :transactions, :credit_card_number, :credit_card_number
+    rename_column :transactions, :cc_expiration, :credit_card_expiration_dateß
   end
 end
