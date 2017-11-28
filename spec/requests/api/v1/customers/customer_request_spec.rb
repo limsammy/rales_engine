@@ -12,4 +12,16 @@ feature 'Customers API' do
 
     expect(customers.count).to eq(5)
   end
+
+  it 'returns customer by id' do
+    customer = create(:customer)
+
+    get "/api/v1/customer/#{customer.id}"
+
+    expect(response).to be_success
+
+    parsed = JSON.parse(response.body)
+
+    expect(parsed["id"]).to eq(customer.id.to_s)
+  end
 end
