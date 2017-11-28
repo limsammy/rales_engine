@@ -6,6 +6,7 @@ namespace :import_csv do
     csv = CSV.parse(csv_text, :headers => true, header_converters: :symbol)
     csv.each do |row|
       Customer.create!(row.to_hash)
+    puts "Done!"
     end
   end
 
@@ -14,6 +15,7 @@ namespace :import_csv do
     csv = CSV.parse(csv_text, :headers => true, header_converters: :symbol)
     csv.each do |row|
       Merchant.create!(row.to_hash)
+    puts "Done!"
     end
   end
 
@@ -22,6 +24,7 @@ namespace :import_csv do
     csv = CSV.parse(csv_text, :headers => true, header_converters: :symbol)
     csv.each do |row|
       Item.create!(row.to_hash)
+    puts "Done!"
     end
   end
 
@@ -30,6 +33,7 @@ namespace :import_csv do
     csv = CSV.parse(csv_text, :headers => true, header_converters: :symbol)
     csv.each do |row|
       Invoice.create!(row.to_hash)
+    puts "Done!"
     end
   end
 
@@ -38,6 +42,7 @@ namespace :import_csv do
     csv = CSV.parse(csv_text, :headers => true, header_converters: :symbol)
     csv.each do |row|
       Transaction.create!(row.to_hash)
+    puts "Done!"
     end
   end
 
@@ -46,6 +51,7 @@ namespace :import_csv do
     csv = CSV.parse(csv_text, :headers => true, header_converters: :symbol)
     csv.each do |row|
       InvoiceItem.create!(row.to_hash)
+    puts "Done!"
     end
   end
 
