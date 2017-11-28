@@ -49,4 +49,14 @@ feature 'Customers API' do
     expect(customers.first["first_name"]).to eq(first_name)
     expect(customers.count).to eq(5)
   end
+
+  it 'can return a random instance' do
+    create_list(:customer, 5)
+
+    get '/api/v1/customers/random'
+
+    expect(response).to be_success
+
+    customer = JSON.parse(response.body)
+  end
 end
