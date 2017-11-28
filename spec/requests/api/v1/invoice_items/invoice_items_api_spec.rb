@@ -3,7 +3,9 @@ require 'rails_helper'
 describe "Invoice Items API" do
 
   before(:each) do
-    create_list(:invoice_item, 5)
+    invoice = create(:invoice)
+    item = create(:item)
+    create_list(:invoice_item, 5, item_id: item.id, invoice_id: invoice.id)
   end
 
   it "returns all invoice items" do
