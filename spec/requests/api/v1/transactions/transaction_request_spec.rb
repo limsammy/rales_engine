@@ -48,7 +48,7 @@ describe "Transactions API" do
     customer = create(:customer)
     merchant = create(:merchant)
     invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-    credit_card_number = create(:transaction, invoice_id: invoice.id).credit_card_number
+    credit_card_number = create(:transaction, invoice_id: invoice.id).cc_num
 
     get "/api/v1/transactions/find_all?credit_card_number=#{credit_card_number}"
 
