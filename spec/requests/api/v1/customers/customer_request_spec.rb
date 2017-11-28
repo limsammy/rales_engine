@@ -36,4 +36,17 @@ feature 'Customers API' do
 
     expect(customer['id']).to eq(id)
   end
+
+  it 'can #find_all instances by name' do
+    first_name = create_list(:customer, 5).first.first_name
+
+    get "/api/v1/customers/find_all?first_name=#{first_name}"
+
+    expect(response).to be_success
+
+    customers = JSON.parse(response.body)
+
+    expect(customers.first["first_name"]).to eq(first_name)
+    expect(customers.count).to eq(5)
+  end
 end
