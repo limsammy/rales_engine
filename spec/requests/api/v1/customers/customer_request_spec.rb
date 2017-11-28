@@ -16,7 +16,7 @@ describe 'Customers API' do
   it 'returns customer by id' do
     id = create(:customer).id
 
-    get "/api/v1/customer/#{customer.id}"
+    get "/api/v1/customer/#{id}"
 
     expect(response).to be_success
 
