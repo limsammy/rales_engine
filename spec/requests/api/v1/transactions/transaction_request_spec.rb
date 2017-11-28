@@ -48,14 +48,14 @@ describe "Transactions API" do
     customer = create(:customer)
     merchant = create(:merchant)
     invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-    credit_card_number = create(:transaction, invoice_id: invoice.id).cc_num
+    credit_card_number = create(:transaction, invoice_id: invoice.id).credit_card_number
 
     get "/api/v1/transactions/find_all?credit_card_number=#{credit_card_number}"
 
     transaction = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(transaction.first["cc_num"]).to eq(credit_card_number)
+    expect(transaction.first["credit_card_number"]).to eq(credit_card_number)
   end
   #
   it "can return a random transaction" do
