@@ -16,7 +16,7 @@ describe "Transactions API" do
     expect(transactions.count).to eq(3)
   end
 
-  it "can get one transaction by its id" do
+  it "can get a single transaction by its id" do
     customer = create(:customer)
     merchant = create(:merchant)
     invoice = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
