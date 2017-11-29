@@ -18,7 +18,7 @@ describe "Customer Business Intelligence" do
     invoice_item3 = create(:invoice_item, invoice_id: invoice3.id, quantity: 2, item_id: item.id)
     transaction1 = create(:transaction, invoice_id: invoice3.id, result: "success")
 
-    get "/api/v1/merchants/#{merchant.id}/favorite_customer"
+    get "/api/v1/customers/#{customer.id}/favorite_merchant"
 
     fav_merchant = JSON.parse(response.body)
     expect(fav_merchant["id"]).to eq(merchant.id)
