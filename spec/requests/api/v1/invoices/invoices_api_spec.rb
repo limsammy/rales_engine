@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe "Invoices API" do
   before(:each) do
-    create_list(:invoice, 5)
+    merchant_id = create(:merchant).id
+    customer_id = create(:customer).id
+    create_list(:invoice, 5, merchant_id: merchant_id, customer_id: customer_id)
   end
 
   it "sends a collection of invoice objects" do
