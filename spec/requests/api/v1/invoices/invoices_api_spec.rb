@@ -18,8 +18,6 @@ describe "Invoices API" do
     expect(invoice_1).to have_key("customer_id")
     expect(invoice_1).to have_key("merchant_id")
     expect(invoice_1).to have_key("status")
-    expect(invoice_1).to have_key("created_at")
-    expect(invoice_1).to have_key("updated_at")
   end
 
   it "sends an invoice object" do
@@ -33,7 +31,5 @@ describe "Invoices API" do
     expect(invoice).to have_key("customer_id")
     expect(invoice).to have_key("merchant_id")
     expect(invoice).to have_key("status")
-    expect(invoice).to have_key("created_at")
-    expect(invoice).to have_key("updated_at")
   end
 end
