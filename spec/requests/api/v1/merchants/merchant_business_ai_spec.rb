@@ -20,8 +20,8 @@ describe "Merchant Business Intelligence" do
 
     get "/api/v1/merchants/#{merchant.id}/favorite_customer"
 
-    response = JSON.parse(response.body)
-    expect(response["id"]).to eq(customer.id)
+    fav_customer = JSON.parse(response.body)
+    expect(fav_customer["id"]).to eq(customer.id)
   end
 
   it "returns the top x merchants ranked by total revenue" do
