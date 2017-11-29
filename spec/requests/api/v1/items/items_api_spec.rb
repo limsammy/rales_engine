@@ -20,8 +20,6 @@ describe "Items API" do
     expect(item).to have_key("description")
     expect(item).to have_key("unit_price")
     expect(item).to have_key("merchant_id")
-    expect(item).to have_key("created_at")
-    expect(item).to have_key("updated_at")
   end
 
   it "sends an individual item" do
@@ -36,7 +34,5 @@ describe "Items API" do
     expect(item).to have_key("description")
     expect(item).to have_key("unit_price")
     expect(item).to have_key("merchant_id")
-    expect(item).to have_key("created_at")
-    expect(item).to have_key("updated_at")
   end
 end
