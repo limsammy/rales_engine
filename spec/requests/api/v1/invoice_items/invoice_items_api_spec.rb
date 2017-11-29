@@ -3,8 +3,9 @@ require 'rails_helper'
 describe "Invoice Items API" do
 
   before(:each) do
+    merchant = create(:merchant)
     invoice = create(:invoice)
-    item = create(:item)
+    item = create(:item, merchant_id: merchant.id)
     create_list(:invoice_item, 5, item_id: item.id, invoice_id: invoice.id)
   end
 
