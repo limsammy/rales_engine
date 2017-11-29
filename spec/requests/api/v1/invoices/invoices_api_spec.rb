@@ -2,7 +2,9 @@ require 'rails_helper'
 
 describe "Invoices API" do
   before(:each) do
-    create_list(:invoice, 5)
+    merchant_id = create(:merchant).id
+    customer_id = create(:customer).id
+    create_list(:invoice, 5, merchant_id: merchant_id, customer_id: customer_id)
   end
 
   it "sends a collection of invoice objects" do
@@ -18,8 +20,6 @@ describe "Invoices API" do
     expect(invoice_1).to have_key("customer_id")
     expect(invoice_1).to have_key("merchant_id")
     expect(invoice_1).to have_key("status")
-    expect(invoice_1).to have_key("created_at")
-    expect(invoice_1).to have_key("updated_at")
   end
 
   it "sends an invoice object" do
@@ -33,7 +33,5 @@ describe "Invoices API" do
     expect(invoice).to have_key("customer_id")
     expect(invoice).to have_key("merchant_id")
     expect(invoice).to have_key("status")
-    expect(invoice).to have_key("created_at")
-    expect(invoice).to have_key("updated_at")
   end
 end
