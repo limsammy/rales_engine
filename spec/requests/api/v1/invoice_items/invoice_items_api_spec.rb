@@ -6,8 +6,8 @@ describe "Invoice Items API" do
     merchant_id = create(:merchant).id
     customer_id = create(:customer).id
     invoice = create(:invoice, merchant_id: merchant_id, customer_id: customer_id)
-    item = create(:item)
     create_list(:invoice_item, 5, item_id: item.id, invoice_id: invoice.id)
+    item = create(:item, merchant_id: merchant.id)
   end
 
   it "returns all invoice items" do

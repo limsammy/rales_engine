@@ -3,7 +3,8 @@ require 'rails_helper'
 describe "Items API" do
 
   before(:each) do
-    create_list(:item, 5)
+    merchant = create(:merchant)
+    create_list(:item, 5, merchant_id: merchant.id)
   end
 
   it "sends a list of items" do
