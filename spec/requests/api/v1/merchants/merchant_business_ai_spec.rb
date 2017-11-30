@@ -98,11 +98,9 @@ describe "Merchant Business Intelligence" do
 
     get "/api/v1/merchants/#{merchant.id}/revenue"
 
-    revenue1 = Merchant.total_revenue(merchant.id)
-
     revenue = JSON.parse(response.body)
 
-    expect(revenue1).to eq(24.0)
+    expect(revenue["revenue"]).to eq("24.0")
   end
 
   it "returns the total revenue for for date accross all merchants" do
