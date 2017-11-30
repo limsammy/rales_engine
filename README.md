@@ -1,24 +1,18 @@
-# README
+# How to Setup
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This readme will walk you through the setup and installation of this app.
 
-Things you may want to cover:
+### Running Locally
 
-* Ruby version
+  * Clone this repo.
+  * cd into it
+  * ```bundle install```
+  * ```rake db:create```
+  * ```rake db:migrate ```
+  * Add dataset to tmp folder
+  * ```rake import_csv:all```
+  * ```rails server```
+  * ```Visit localhost:3000```
 
-* System dependencies
-
-* Configuration
-
-* Database creation
-
-* Database initialization
-
-* How to run the test suite
-
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+### Running the spec harness
+  * Run ```rspec``` from the root directory
