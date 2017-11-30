@@ -36,4 +36,21 @@ describe "Items API" do
     expect(item).to have_key("unit_price")
     expect(item).to have_key("merchant_id")
   end
+
+  it "returns the best day an item had in terms of sales" do
+    merchant = create(:merchant)
+    customer = create(:customer)
+    item = create(:item, merchant_id: merchant.id)
+    invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id,
+      created_at: "2012-03-22T03:55:09.000Z")
+    invoice2 = create(:invoice, merchant_id: merchant.id, customer_id: customer.id,
+      created_at: "2012-03-22T03:55:09.000Z")
+
+    get "/api/v1/items/#{item.id}/best_day"
+
+    day = JSON.parse(response.body)
+
+    expect(response).to be_success
+    expect(day).to eq("2012-03-22T03:55:09.000Z")
+  end
 end
