@@ -55,12 +55,12 @@ describe "Invoices API" do
     invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
     customer_id = customer.id
 
-    get "/api/v1/invoices/find?customer=#{customer_id}"
+    get "/api/v1/invoices/find?customer_id=#{customer_id}"
 
-    invoice = JSON.parse(response.body)
+    invoice_json = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(invoice["customer_id"]).to eq(customer_id)
+    expect(invoice_json["customer_id"]).to eq(customer_id)
   end
 
   it "can find first instance by merchant" do
@@ -69,7 +69,7 @@ describe "Invoices API" do
     invoice = create(:invoice, merchant_id: merchant.id, customer_id: customer.id)
     merchant_id = merchant.id
 
-    get "/api/v1/invoices/find?merchant=#{merchant_id}"
+    get "/api/v1/invoices/find?merchant_id=#{merchant_id}"
 
     invoice = JSON.parse(response.body)
 
