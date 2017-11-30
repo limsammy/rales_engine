@@ -20,4 +20,13 @@ describe "Item Relationship API" do
     expect(invoice_items.first["quantity"]).to eq(@invoice_item.quantity)
   end
 
+  it "can return associated merchant" do
+    get "/api/v1/items/#{@item.id}/merchant"
+
+    expect(response).to be_success
+
+    merchant = JSON.parse(response.body)
+
+    expect(merchant["name"]).to eq(@merchant.name)
+  end
 end
