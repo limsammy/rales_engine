@@ -49,4 +49,14 @@ describe "Invoice Relationships API" do
 
     expect(customer["first_name"]).to eq(@customer.first_name)
   end
+
+  it "can return associated merchant" do
+    get "/api/v1/invoices/#{@invoices.first.id}/merchant"
+
+    expect(response).to be_success
+
+    merchant = JSON.parse(response.body)
+
+    expect(merchant["name"]).to eq(@merchant.name)
+  end
 end
