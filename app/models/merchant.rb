@@ -34,6 +34,5 @@ class Merchant < ApplicationRecord
       .where(id: id)
       .merge(Transaction.successful)
       .sum("unit_price * quantity / 100.0")
->>>>>>> 33ae297c6e791e1184c482bedab86ea78965778f
   end
 end
