@@ -18,12 +18,25 @@ Rails.application.routes.draw do
         get '/:id/invoices', to: "invoices#index"
         get '/:id/items', to: "items#index"
         get '/:id/favorite_customer', to: "favorite_customer#show"
+        get '/:id/revenue', to: "revenue#show"
         get '/most_revenue', to: "most_revenue#index"
+        get '/most_items', to: "most_items#index"
       end
       resources :merchants, only: [:index, :show]
 
+      namespace :items do
+        get '/:id/invoice_items', to: "invoice_items#index"
+        get '/:id/merchant', to: "merchants#show"
+      end
       resources :items, only: [:index, :show]
 
+      namespace :invoices do
+        get '/:id/transactions', to: "transactions#index"
+        get '/:id/invoice_items', to: "invoice_items#index"
+        get '/:id/items', to: "items#index"
+        get '/:id/customer', to: "customers#show"
+        get '/:id/merchant', to: "merchants#show"
+      end
       resources :invoices, only: [:index, :show]
 
       namespace :transactions do
@@ -34,6 +47,10 @@ Rails.application.routes.draw do
       end
       resources :transactions, only: [:index, :show]
 
+      namespace :invoice_items do
+        get '/:id/item', to: "items#show"
+        get '/:id/invoice', to: "invoices#show"
+      end
       resources :invoice_items, only: [:index, :show]
     end
   end
