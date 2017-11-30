@@ -4,7 +4,7 @@ module Api
       class RevenueController < ApplicationController
 
         def show
-          render json: {"revenue" => Merchant.total_revenue(params[:id]).to_s }
+          render json: {"revenue" => Merchant.total_revenue(params[:id]) }
         end
 
       end
