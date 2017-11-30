@@ -29,9 +29,9 @@ class Merchant < ApplicationRecord
       .limit(quantity)
   end
 
-  def self.total_revenue(id, date)
+  def self.total_revenue(date, id = nil)
     joins(invoices: [:transactions, :invoice_items])
-      .where(id: id)
+      .where(Merchant.identify_single_merchant(id))
       .where(Merchant.filter_date(date))
       .merge(Transaction.successful)
       .sum("unit_price * quantity / 100.0")
@@ -40,4 +40,9 @@ class Merchant < ApplicationRecord
   def self.filter_date(date)
     {invoices: {created_at: date}} unless date.nil?
   end
+
+  def self.identify_single_merchant(id)
+    {id: id} unless id.nil?
+  end
+
 end

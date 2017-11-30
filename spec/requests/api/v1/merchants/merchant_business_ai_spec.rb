@@ -129,40 +129,34 @@ describe "Merchant Business Intelligence" do
     expect(revenue["revenue"]).to eq("24.0")
   end
 
-  it "returns the total revenue for for date accross all merchants" do
+  it "returns the total revenue for all merchants across successful transactions on a date" do
     customer = create(:customer)
     merchant = create(:merchant)
     item1 = create(:item, merchant_id: merchant.id, unit_price: 200)
+    that_one_day = "2012-03-25 09:54:09 UTC"
 
-    invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-    invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 2, item_id: item1.id)
-    invoice_item2 = create(:invoice_item, invoice_id: invoice1.id, quantity: 1, item_id: item1.id)
-    invoice_item3 = create(:invoice_item, invoice_id: invoice1.id, quantity: 3, item_id: item1.id)
+    invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id, created_at: that_one_day)
+    invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 2, unit_price: 200, item_id: item1.id)
+    invoice_item2 = create(:invoice_item, invoice_id: invoice1.id, quantity: 1, unit_price: 200, item_id: item1.id)
+    invoice_item3 = create(:invoice_item, invoice_id: invoice1.id, quantity: 3, unit_price: 200, item_id: item1.id)
 
     transaction1 = create(:transaction, invoice_id: invoice1.id, result: "success")
     transaction2 = create(:transaction, invoice_id: invoice1.id, result: "failed")
     transaction3 = create(:transaction, invoice_id: invoice1.id, result: "success")
 
-    customer2 = create(:customer)
     merchant2 = create(:merchant)
-    item2 = create(:item, merchant_id: merchant2.id, unit_price: 200)
-
-    invoice2 = create(:invoice, customer_id: customer2.id, merchant_id: merchant2.id)
-    invoice_item4 = create(:invoice_item, invoice_id: invoice1.id, quantity: 2, item_id: item2.id)
-    invoice_item5 = create(:invoice_item, invoice_id: invoice1.id, quantity: 1, item_id: item2.id)
-    invoice_item6 = create(:invoice_item, invoice_id: invoice1.id, quantity: 3, item_id: item2.id)
-
+    invoice2 = create(:invoice, customer_id: customer.id, merchant_id: merchant2.id, created_at: that_one_day)
+    invoice_item4 = create(:invoice_item, invoice_id: invoice2.id, quantity: 4, unit_price: 200, item_id: item1.id)
     transaction4 = create(:transaction, invoice_id: invoice2.id, result: "success")
-    transaction5 = create(:transaction, invoice_id: invoice2.id, result: "failed")
-    transaction6 = create(:transaction, invoice_id: invoice2.id, result: "success")
 
+    merchant3 = create(:merchant)
+    invoice3 = create(:invoice, customer_id: customer.id, merchant_id: merchant3.id)
+    invoice_item5 = create(:invoice_item, invoice_id: invoice3.id, quantity: 4, unit_price: 200, item_id: item1.id)
 
-    get "/api/v1/merchants/revenue?date=2012-03-16%2011:55:05"
-
-    revenue1 = merchant.total_revenue
+    that_one_day_url = "2012-03-25 09:54:09"
+    get "/api/v1/merchants/revenue?date=#{that_one_day_url}"
 
     revenue = JSON.parse(response.body)
-
-    expect(response).to be_success
+    expect(revenue["total_revenue"]).to eq("32.0")
   end
 end
