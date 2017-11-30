@@ -49,4 +49,16 @@ describe "Item Relationship API" do
     expect(items.first["name"]).to eq(@items.third.name)
     expect(items.second["name"]).to eq(@items.first.name)
   end
+
+  it "can return top x items by revenue" do
+    get "/api/v1/items/most_items?quantity=2"
+
+    expect(response).to be_success
+
+    items = JSON.parse(response.body)
+
+    expect(items.count).to eq(2)
+    expect(items.first["name"]).to eq(@items.third.name)
+    expect(items.second["name"]).to eq(@items.first.name)
+  end
 end
