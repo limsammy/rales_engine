@@ -15,6 +15,7 @@ gem 'puma', '~> 3.7'
 
 gem 'activerecord-import' # Not in use yet. TODO
 gem 'active_model_serializers'
+gem 'simplecov', :require => false, :group => :test
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
