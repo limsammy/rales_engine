@@ -35,6 +35,7 @@ Rails.application.routes.draw do
 
       namespace :invoice_items do
         get '/:id/item', to: "items#show"
+        get '/:id/invoice', to: "invoices#show"
       end
       resources :invoice_items, only: [:index, :show]
     end
