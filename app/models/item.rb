@@ -12,10 +12,18 @@ class Item < ApplicationRecord
   end
 
   def self.most_revenue(quantity)
+    most_by("sum(invoice_items.quantity * invoice_items.unit_price) DESC", quantity)
+  end
+
+  def self.most_items(quantity)
+    most_by("sum(invoice_items.quantity) DESC", quantity)
+  end
+
+  def self.most_by(criteria, quantity)
     joins(invoices: :transactions)
       .merge(Transaction.successful)
       .group(:id)
-      .order("sum(invoice_items.quantity * invoice_items.unit_price) DESC")
+      .order(criteria)
       .limit(quantity)
   end
 end
