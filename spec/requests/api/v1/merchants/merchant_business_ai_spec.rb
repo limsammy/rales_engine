@@ -88,9 +88,9 @@ describe "Merchant Business Intelligence" do
     item1 = create(:item, merchant_id: merchant.id, unit_price: 200)
 
     invoice1 = create(:invoice, customer_id: customer.id, merchant_id: merchant.id)
-    invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 2, item_id: item1.id)
-    invoice_item2 = create(:invoice_item, invoice_id: invoice1.id, quantity: 1, item_id: item1.id)
-    invoice_item3 = create(:invoice_item, invoice_id: invoice1.id, quantity: 3, item_id: item1.id)
+    invoice_item1 = create(:invoice_item, invoice_id: invoice1.id, quantity: 2, unit_price: 200, item_id: item1.id)
+    invoice_item2 = create(:invoice_item, invoice_id: invoice1.id, quantity: 1, unit_price: 200, item_id: item1.id)
+    invoice_item3 = create(:invoice_item, invoice_id: invoice1.id, quantity: 3, unit_price: 200, item_id: item1.id)
 
     transaction1 = create(:transaction, invoice_id: invoice1.id, result: "success")
     transaction2 = create(:transaction, invoice_id: invoice1.id, result: "failed")
@@ -98,11 +98,11 @@ describe "Merchant Business Intelligence" do
 
     get "/api/v1/merchants/#{merchant.id}/revenue"
 
-    revenue1 = merchant.total_revenue
+    revenue1 = Merchant.total_revenue(merchant.id)
 
     revenue = JSON.parse(response.body)
 
-    expect(revenue1).to eq(12)
+    expect(revenue1).to eq(24.0)
   end
 
   it "returns the total revenue for for date accross all merchants" do
