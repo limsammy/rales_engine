@@ -39,4 +39,14 @@ describe "Invoice Relationships API" do
 
     expect(items.first["name"]).to eq(@item.name)
   end
+
+  it "can return associated customer" do
+    get "/api/v1/invoices/#{@invoices.first.id}/customer"
+
+    expect(response).to be_success
+
+    customer = JSON.parse(response.body)
+
+    expect(customer["first_name"]).to eq(@customer.first_name)
+  end
 end
