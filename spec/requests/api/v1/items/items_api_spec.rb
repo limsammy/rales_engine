@@ -88,4 +88,16 @@ describe "Items API" do
 
     expect(response_day['best_day']).to eq best_day
   end
+
+  it "can return a random item" do
+    get "/api/v1/items/random"
+
+    item = JSON.parse(response.body)
+
+    expect(item).to have_key("id")
+    expect(item).to have_key("name")
+    expect(item).to have_key("description")
+    expect(item).to have_key("unit_price")
+    expect(item).to have_key("merchant_id")
+  end
 end
