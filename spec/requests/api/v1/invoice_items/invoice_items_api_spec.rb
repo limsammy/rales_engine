@@ -36,4 +36,15 @@ describe "Invoice Items API" do
     expect(invoice_item).to have_key("quantity")
     expect(invoice_item).to have_key("unit_price")
   end
+
+  it "can find the first instance of a given unit_price" do
+    inv_item = InvoiceItem.second
+    get "/api/v1/invoice_items/find?unit_price=#{inv_item.unit_price/100.0}"
+
+    expect(response).to be_success
+
+    invoice_item = JSON.parse(response.body)
+
+    expect(invoice_item["id"]).to eq(inv_item.id)
+  end
 end
