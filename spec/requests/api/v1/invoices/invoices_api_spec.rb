@@ -88,4 +88,15 @@ describe "Invoices API" do
     expect(response).to be_success
     expect(invoice_json.first["id"]).to eq(invoice.id)
   end
+
+  it "can return a random invoice" do
+    get "/api/v1/invoices/random"
+
+    invoice = JSON.parse(response.body)
+
+    expect(invoice).to have_key("id")
+    expect(invoice).to have_key("customer_id")
+    expect(invoice).to have_key("merchant_id")
+    expect(invoice).to have_key("status")
+  end
 end
