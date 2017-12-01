@@ -7,4 +7,7 @@ class Invoice < ApplicationRecord
   has_many :invoice_items
   has_many :items, through: :invoice_items
 
+  def self.pending_transactions
+    joins(:transactions).where("result = 'failed'")
+  end
 end

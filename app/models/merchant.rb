@@ -45,4 +45,7 @@ class Merchant < ApplicationRecord
     {id: id} unless id.nil?
   end
 
+  def pending
+    invoices.pending_transactions.map(&:customer)
+  end
 end
