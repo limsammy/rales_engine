@@ -9,10 +9,9 @@ This readme will walk you through the setup and installation of this app.
   * ```bundle install```
   * ```rake db:create```
   * ```rake db:migrate ```
-  * Add dataset to tmp folder
   * ```rake import_csv:all```
   * ```rails server```
   * ```Visit localhost:3000```
 
-### Running the spec harness
+### Running the test suite
   * Run ```rspec``` from the root directory
