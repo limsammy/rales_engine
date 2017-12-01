@@ -7,7 +7,7 @@ describe "Invoice Items API" do
     customer_id = create(:customer).id
     @item = create(:item, merchant_id: merchant_id)
     @invoice = create(:invoice, merchant_id: merchant_id, customer_id: customer_id)
-    create_list(:invoice_item, 5, item_id: @item.id, invoice_id: @invoice.id)
+    @invoice_items = create_list(:invoice_item, 5, item_id: @item.id, invoice_id: @invoice.id)
   end
 
   it "returns all invoice items" do
@@ -38,7 +38,7 @@ describe "Invoice Items API" do
   end
 
   it "can find the first instance of a given unit_price" do
-    inv_item = InvoiceItem.second
+    inv_item = @invoice_items.first
     get "/api/v1/invoice_items/find?unit_price=#{inv_item.unit_price/100.0}"
 
     expect(response).to be_success
