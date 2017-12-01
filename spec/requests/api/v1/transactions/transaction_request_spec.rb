@@ -83,7 +83,7 @@ describe "Transactions API" do
     invoice_json = JSON.parse(response.body)
 
     expect(response).to be_success
-    expect(transaction.invoice.as_json).to eq(invoice_json)
+    expect(transaction.invoice.id).to eq(invoice_json["id"])
   end
 
 end
