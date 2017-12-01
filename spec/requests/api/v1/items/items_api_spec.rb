@@ -37,6 +37,33 @@ describe "Items API" do
     expect(item).to have_key("merchant_id")
   end
 
+  it "can return a single item with a given unit_price" do
+    db_item = Item.second
+
+    get "/api/v1/items/find?unit_price=#{db_item.unit_price/100.0}"
+
+    expect(response).to be_success
+
+    json_item = JSON.parse(response.body)
+
+    expect(json_item["id"]).to eq(db_item.id)
+  end
+
+  it "can return a single item with a given unit_price" do
+    db_item = Item.second
+    create(:item, merchant_id: db_item.merchant_id, unit_price: db_item.unit_price)
+
+    get "/api/v1/items/find_all?unit_price=#{db_item.unit_price/100.0}"
+
+    expect(response).to be_success
+
+    json_item = JSON.parse(response.body)
+
+    expect(json_item.count).to eq(2)
+    expect(json_item.first["id"]).to eq(db_item.id)
+    expect(json_item.last["id"]).to eq(Item.last.id)
+  end
+
   it 'returns day with most sales' do
     best_day = '2012-03-22T03:55:09.000Z'
     other_day = '2012-03-20T23:57:05.000Z'
