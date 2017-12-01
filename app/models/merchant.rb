@@ -46,6 +46,6 @@ class Merchant < ApplicationRecord
   end
 
   def pending
-    invoices.pending_transactions.map(&:customer).uniq
+    invoices.pending_transactions.map(&:customer)
   end
 end
