@@ -3,6 +3,8 @@ class Item < ApplicationRecord
   has_many :invoice_items
   has_many :invoices, through: :invoice_items
 
+  default_scope { order(:id) }
+
   def best_day
     invoices.joins(:invoice_items)
       .group('invoices.id, invoices.created_at')
@@ -20,10 +22,12 @@ class Item < ApplicationRecord
   end
 
   def self.most_by(criteria, quantity)
-    joins(invoices: :transactions)
+    unscoped
+      .joins(invoices: :transactions)
       .merge(Transaction.successful)
       .group(:id)
       .order(criteria)
       .limit(quantity)
   end
+
 end
